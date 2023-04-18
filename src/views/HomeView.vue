@@ -47,19 +47,19 @@ const route = useRoute()
 const List = ref([
   {
     title: `To be honest, you're not my type. Butif you want to know something about entertainment, no one knows better thanme.`,
-    img: 'src/assets/img/pep.png'
+    img: '../assets/img/pep.png'
   },
   {
     title: `To be honest, you're not my type. Butif you want to know something about entertainment, no one knows better thanme.`,
-    img: 'src/assets/img/pep1.png'
+    img: '../assets/img/pep1.png'
   },
   {
     title: `To be honest, you're not my type. Butif you want to know something about entertainment, no one knows better thanme.`,
-    img: 'src/assets/img/pep2.png'
+    img: '../assets/img/pep2.png'
   },
   {
     title: `To be honest, you're not my type. Butif you want to know something about entertainment, no one knows better thanme.`,
-    img: 'src/assets/img/pep3.png'
+    img: '../assets/img/pep3.png'
   }
 ])
 const swipe: any = ref()
