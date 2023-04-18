@@ -32,7 +32,7 @@
               <div class="chatsjx"></div>
             </div>
             <div class="imgbox">
-              <img :src="item.img" alt="" />
+              <img :src="`/src/assets/img/${item.img}`" alt="" />
             </div>
           </van-swipe-item>
         </van-swipe>
@@ -56,19 +56,19 @@ const route = useRoute()
 const List = ref([
   {
     title: `To be honest, you're not my type. Butif you want to know something about entertainment, no one knows better thanme.`,
-    img: '/assets/img/pep.png'
+    img: 'pep.png'
   },
   {
     title: `To be honest, you're not my type. Butif you want to know something about entertainment, no one knows better thanme.`,
-    img: '/assets/img/pep1.png'
+    img: 'pep1.png'
   },
   {
     title: `To be honest, you're not my type. Butif you want to know something about entertainment, no one knows better thanme.`,
-    img: '/assets/img/pep2.png'
+    img: 'pep2.png'
   },
   {
     title: `To be honest, you're not my type. Butif you want to know something about entertainment, no one knows better thanme.`,
-    img: '/assets/img/pep3.png'
+    img: 'pep3.png'
   }
 ])
 const swipe: any = ref()
