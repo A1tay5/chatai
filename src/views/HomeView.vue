@@ -32,7 +32,7 @@
               <div class="chatsjx"></div>
             </div>
             <div class="imgbox">
-              <img :src="`/src/assets/img/${item.img}`" alt="" />
+              <img :src="`${item.img}`" alt="" />
             </div>
           </van-swipe-item>
         </van-swipe>
@@ -53,24 +53,29 @@ import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 const router = useRouter()
 const route = useRoute()
+const getImageUrl = (image: any) => {
+  // 里面可以根据需求写逻辑
+  return new URL(`../assets/img/${image}`, import.meta.url).href
+}
 const List = ref([
   {
     title: `To be honest, you're not my type. Butif you want to know something about entertainment, no one knows better thanme.`,
-    img: 'pep.png'
+    img: getImageUrl('pep.png')
   },
   {
     title: `To be honest, you're not my type. Butif you want to know something about entertainment, no one knows better thanme.`,
-    img: 'pep1.png'
+    img: getImageUrl('pep1.png')
   },
   {
     title: `To be honest, you're not my type. Butif you want to know something about entertainment, no one knows better thanme.`,
-    img: 'pep2.png'
+    img: getImageUrl('pep2.png')
   },
   {
     title: `To be honest, you're not my type. Butif you want to know something about entertainment, no one knows better thanme.`,
-    img: 'pep3.png'
+    img: getImageUrl('pep3.png')
   }
 ])
+
 const swipe: any = ref()
 const swipeTo = (val: any) => {
   if (val == 1) {
@@ -88,7 +93,11 @@ const ChatTo = () => {
 :deep(.van-nav-bar__content) {
   height: 80px !important;
 }
-
+:deep(.van-swipe__track) {
+  display: flex;
+  height: 100%;
+  align-items: flex-end;
+}
 .Chat {
   width: 100%;
   height: calc(100% - 60px);
