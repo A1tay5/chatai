@@ -17,6 +17,15 @@
           :touchable="false"
           indicator-color="white"
         >
+          <van-swipe-item>
+            <div class="chatbox">
+              1231231213212
+              <div class="chatsjx"></div>
+            </div>
+            <div class="imgbox">
+              <img src="@/assets/img/pep.png" alt="" />
+            </div>
+          </van-swipe-item>
           <van-swipe-item v-for="(item, index) in List" :key="index">
             <div class="chatbox">
               {{ item.title }}
