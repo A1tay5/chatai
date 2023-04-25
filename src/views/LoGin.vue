@@ -4,16 +4,18 @@
       <template v-if="box"
         ><div class="title">Sign In</div>
         <div class="ipt"><van-field v-model="email" placeholder="Enter Email" /></div>
-        <div class="ipt"><van-field v-model="password" placeholder="Enter Password" /></div>
         <div class="bt">
-          <van-button type="default" color="#6285c1" @click="box = false">Confirm</van-button>
+          <van-button type="default" color="#6285c1" @click="GetEmailcode">Confirm</van-button>
         </div></template
       >
       <template v-else
         ><div class="title">Sign In</div>
-        <div class="ipt"><van-field v-model="Code" placeholder="Enter Verification Code" /></div>
+        <div class="ipt">
+          <van-field v-model="Code" placeholder="Enter Verification Code" />
+          <div class="ipt"><van-field v-model="password" placeholder="Enter Password" /></div>
+        </div>
         <div class="bt">
-          <van-button type="default" color="#6285c1" @click="codeNext">Complete</van-button>
+          <van-button type="default" color="#6285c1" @click="PostEmailcode">Complete</van-button>
         </div></template
       >
     </div>
@@ -23,6 +25,8 @@
 import { useRouter, useRoute } from 'vue-router'
 import { watch, reactive, ref } from 'vue'
 import useStore from '@/stores/index'
+import { login, getEmailcode, postEmailcode } from '@/api/user'
+
 const router = useRouter()
 const route: any = useRoute()
 const { counter, user }: any = useStore()
@@ -30,13 +34,35 @@ const email = ref()
 const password = ref()
 const Code = ref()
 const box = ref(true)
-const codeNext = () => {
-  user.userId = true
-  console.log(router)
-
-  const to = route.query.redirect
-  setTimeout(() => {
-    router.replace(to)
+const GetEmailcode = () => {
+  getEmailcode(email.value).then((res: any) => {
+    if (res.code == 200) {
+      Code.value = res.data
+      box.value = false
+    }
+  })
+}
+const PostEmailcode = () => {
+  postEmailcode({ email: email.value, code: Code.value, password: password.value }).then(
+    (res: any) => {
+      if (res.code == 200) {
+        Getlogin()
+      }
+    }
+  )
+}
+const Getlogin = () => {
+  login({ email: email.value, password: password.value }).then((res: any) => {
+    if (res.code == 200) {
+      user.userInfo = res.data
+      setTimeout(() => {
+        if (route.query.redirect) {
+          router.replace(route.query.redirect)
+        } else {
+          router.back()
+        }
+      })
+    }
   })
 }
 </script>

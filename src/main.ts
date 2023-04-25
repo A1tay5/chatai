@@ -1,6 +1,9 @@
+import getDeviceInfo from '@/utils/common'
+import fireBaseEvent from '@/utils/fireBaseEvent'
+
+// fireBaseEvent.onEvent(fireBaseEvent.eventList.switch_app_init, Date.now() / 1000)
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-
 import App from './App.vue'
 import router from './router'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
@@ -16,5 +19,6 @@ vantPlugins.forEach((item) => {
 })
 app.use(pinia)
 app.use(router)
+getDeviceInfo.getDeviceInfo()
 
 app.mount('#app')

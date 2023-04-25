@@ -4,8 +4,11 @@ const useUserStore = defineStore('user', {
   persist: true,
   state: () => {
     return {
-      userId: null,
-      chatNum: 3
+      userInfo: {
+        customerId: null
+      },
+      chatNum: 5,
+      token: ''
     }
   }
 })

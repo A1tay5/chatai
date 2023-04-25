@@ -11,7 +11,7 @@ const router = useRouter()
 const route = useRoute()
 const { counter, user } = useStore()
 setTimeout(() => {
-  counter.step = 1
+  // counter.step = 1
   router.replace('/')
 }, 3000)
 </script>

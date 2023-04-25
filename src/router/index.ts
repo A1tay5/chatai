@@ -48,7 +48,7 @@ const router = createRouter({
 })
 const whitelist = ['home', 'recharge', 'Experts', 'setting', 'login']
 router.beforeEach((to: any, from: any, next) => {
-  if (useStore().user.userId) {
+  if (useStore().user.userInfo) {
     next()
   } else {
     if (whitelist.indexOf(to.name) !== -1) {

@@ -9,18 +9,39 @@ import { RouterView } from 'vue-router'
 import TabBar from '@/components/TabBar.vue'
 import useStore from '@/stores/index'
 import Week from '@/utils/days'
+import socketInstance from '@/plugins/socket/socket-instance'
+import { register } from '@/api/user'
 const router = useRouter()
 const route = useRoute()
 const tabBarShow = ref(false)
-const { counter, user }: any = useStore()
+const { counter, user, config }: any = useStore()
 const week = Week.NewWeek()
+console.log(import.meta.url)
 
-if (week > counter.week || !counter.week) {
-  counter.week = week
-  if (user.chatNum < 3) {
-    user.chatNum = 3
-  }
-}
+
+setTimeout(() => {}, 1000)
+watch(
+  () => config.client.aid,
+  (val) => {
+    if (val && !user.token) {
+      register({ deviceId: config.client.device_id, packageName: config.client.package_name }).then(
+        (res) => {
+          user.token = res.data.token
+        }
+      )
+    }
+  },
+  { deep: true, immediate: true }
+)
+watch(
+  () => user.userInfo?.customerId,
+  (val) => {
+    if (val) {
+      socketInstance.connect(val)
+    }
+  },
+  { deep: true, immediate: true }
+)
 watch(
   () => route,
   (val) => {
